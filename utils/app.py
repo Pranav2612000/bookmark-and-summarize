@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
 
 #Home Page
-@app.route('/Signup', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST'])
+def default():
+    return render_template('../html_src/sign_up.html')
+
+@app.route('/SignUp', methods = ['GET', 'POST'])
 def new_user():
     if request.method == 'POST':
         #Get the details of the user
