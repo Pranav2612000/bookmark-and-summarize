@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
 
+app = Flask(__name__, template_folder = '../html_src/')
+
 #Home Page
 @app.route('/', methods = ['GET', 'POST'])
 def default():
-    return render_template('../html_src/sign_up.html')
+    return render_template('sign_up.html')
 
 @app.route('/SignUp', methods = ['GET', 'POST'])
 def new_user():
@@ -14,4 +16,10 @@ def new_user():
 
         ret_val = add_user_to_db(user_id, password)
 
-        
+        if ret_val == True:
+            return render_template('sign_up.html')
+
+
+if __name__ == "__main__":
+
+    app.run(debug = True)
