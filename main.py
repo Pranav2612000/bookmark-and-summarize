@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import sys
 import os
 from utils import *
-from utils import dynamodb_utils
+from utils import dynamodb_utils, get_summary
 
 
 app = Flask(__name__, template_folder = 'html_src/')
@@ -42,6 +42,9 @@ def new_user():
                     reason = "User already exists"
                 
                 return render_template('failed.html', reason = reason)
+
+            else:
+                return render_template('signup.html')
                 
 
     except:
@@ -71,6 +74,9 @@ def sign_in():
             else:
                 return redirect("/Home")
 
+        else:
+            return render_template('login.html')
+
     except:
         return 'Internal Server Error'
 
@@ -87,6 +93,8 @@ def add_bookmark():
             user_id = ...
 
             url = request.form['URL']
+
+            article_summary = get_summary.get_summary(article_text)
 
             dynamodb_utils.add_bookmark(user_id, url)
 

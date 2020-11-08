@@ -1,8 +1,23 @@
 import requests
+from bs4 import BeautifulSoup
+import lxml
 
 licence_key = "1a680fdbb39913433f80cd0b47c8ecad"
 
-def get_summary(article):
+def get_text(url):
+
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.text, 'lxml')
+
+    # TODO: add filter for soup to remove bad elements (maybe, not needed)
+
+    return soup.get_text()
+
+
+def get_summary(url):
+
+    article = get_text(url)
 
     # Create the request body to be sent
     request_body = {
