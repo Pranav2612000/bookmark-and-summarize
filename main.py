@@ -6,7 +6,7 @@ from utils import add_user_to_db
 #sys.path.append("..")
 
 
-app = Flask(__name__, template_folder = '../html_src/')
+app = Flask(__name__, template_folder = 'html_src/')
 
 #Home Page which is currently for signup
 @app.route('/', methods = ['GET', 'POST'])
