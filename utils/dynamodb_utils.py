@@ -94,9 +94,7 @@ def add_bookmark(username, url):
 
     summary = get_summary(url)
 
-    entry = dict()
-    entry['URL'] = url
-    entry['summary'] = summary
+    entry = (url, summary)
 
     arr = response['Item']['bookmarks']
 

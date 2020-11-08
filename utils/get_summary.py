@@ -33,6 +33,8 @@ def get_summary(url):
     return summary
 
 if __name__ == '__main__':
+
+    print (get_summary("https://medium.com/@jcalabrese/serverless-web-scrap-using-aws-lambda-and-s3-python-12bf1d27ea3f"))
     text = '''
  Stephen Reucroft in the Elementary Particle Physics group at Northeastern University gives this introductory reply:
     "Over the past few decades, particle physicists have developed an elegant theoretical model (the Standard Model) that gives a framework for our current understanding of the fundamental particles and forces of nature. One major ingredient in this model is a hypothetical, ubiquitous quantum field that is supposed to be responsible for giving particles their masses (this field would answer the basic question of why particles have the masses they do--or indeed, why they have any mass at all). This field is called the Higgs field. As a consequence of wave-particle duality, all quantum fields have a fundamental particle associated with them. The particle associated with the Higgs field is called the Higgs boson.
@@ -84,4 +86,4 @@ if __name__ == '__main__':
     The vast potential of atomic-scale microscopy
     '''
     summary = get_summary(text)
-    print(summary)
+    #print(summary)
