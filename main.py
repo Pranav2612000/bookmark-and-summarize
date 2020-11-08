@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 import sys
 import os
-sys.path.append("../..")
-from utils import *  
+from utils import *
+#sys.path.append("..")
 
 
 app = Flask(__name__, template_folder = '../html_src/')
