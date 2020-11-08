@@ -8,11 +8,11 @@ from utils import dynamodb_utils, get_summary
 app = Flask(__name__, template_folder = 'html_src/')
 
 #Home Page which is currently for signup
-@app.route('/', methods = ['GET', 'POST'])
-def default():
+# @app.route('/', methods = ['GET', 'POST'])
+# def default():
     #The logging in page to be rendered 
 
-    return render_template('login.html')
+    # return render_template('login.html')
 
 #Processing the sign up request
 @app.route('/SignUp', methods = ['GET', 'POST'])
@@ -50,35 +50,30 @@ def new_user():
     except:
         return "Internal Server Error"
 
-@app.route('/SignIn', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST'])
 def sign_in():
-    try:
-        if request.method == 'POST':
+    if request.method == 'POST':
+        #Get the details of the user
+        user_id = request.form['UserID']
+        password = request.form['Password']
 
-            #Get the details of the user
-            user_id = request.form['UserID']
-            password = request.form['Password']
+        
+        ret_val = dynamodb_utils.verify_login(user_id, password)
 
-            
-            retval = dynamodb_utils.verify_login(user_id, password)
+        #User does not exist
+        if ret_val == 0:
+            return render_template('user_not_exist.html')
 
-            #User does not exist
-            if ret_val == 0:
-                return render_template('user_not_exist.html')
+        #password is wrong
+        elif ret_val == 1:
+            return render_template('password_wrong.html')
 
-            #password is wrong
-            elif ret_val == 1:
-                return render_template('password_wrong.html')
-
-            #Login successful, go to home page
-            else:
-                return redirect("/Home")
-
+        #Login successful, go to home page
         else:
-            return render_template('login.html')
+            return redirect("/Home")
 
-    except:
-        return 'Internal Server Error'
+    else:
+        return render_template('login.html')
 
 @app.route('/Home', methods = ['GET', 'POST'])
 def render_home():
