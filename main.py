@@ -43,7 +43,7 @@ def new_user():
                 
                 return render_template('failed.html', reason = reason)
 
-            else:
+        else:
                 return render_template('signup.html')
                 
 
