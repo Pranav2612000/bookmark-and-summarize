@@ -71,7 +71,7 @@ def sign_in():
             else:
                 return redirect("/Home")
 
-    else:
+    except:
         return 'Internal Server Error'
 
 @app.route('/Home', methods = ['GET', 'POST'])
@@ -91,6 +91,9 @@ def add_bookmark():
             dynamodb_utils.add_bookmark(user_id, url)
 
             return redirect('/Home')
+
+    except:
+        return 'Internal Server error'
 
 @app.route('/Bookmarks', methods = ['GET', 'POST'])
 def display_bookmarks():
