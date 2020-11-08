@@ -1,4 +1,9 @@
 from flask import Flask, render_template, request, redirect, session
+import sys
+import os
+sys.path.append("../..")
+from utils import *  
+
 
 app = Flask(__name__, template_folder = '../html_src/')
 
@@ -15,7 +20,8 @@ def new_user():
         user_id = request.form['UserID']
         password = request.form['Password']
 
-        ret_val = add_user_to_db(user_id, password)
+        print ("User ID and password : {} and {}".format(user_id, password))
+        ret_val = add_user_to_db.add_user_to_db(user_id, password)
 
         if ret_val == True:
             return render_template('sign_up.html')

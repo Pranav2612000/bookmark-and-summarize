@@ -18,4 +18,4 @@ def add_user_to_db(username, password, dynamodb=None):
     return True
 
 if __name__ == "__main__":
-    add_user_to_db("pranav", "mypassword")
+    add_user_to_db("Vishal", "new_password")
