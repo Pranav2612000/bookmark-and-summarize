@@ -3,6 +3,7 @@ import sys
 
 sys.path.append("./utils")
 from db_config import default_dynamodb
+from get_summary import get_summary
 
 
 #Returns 0 if username or password have errors

@@ -42,6 +42,9 @@ def new_user():
                     reason = "User already exists"
                 
                 return render_template('failed.html', reason = reason)
+
+            else:
+                return render_template('signup.html')
                 
 
     except:
@@ -70,6 +73,9 @@ def sign_in():
             #Login successful, go to home page
             else:
                 return redirect("/Home")
+
+        else:
+            return render_template('login.html')
 
     except:
         return 'Internal Server Error'
