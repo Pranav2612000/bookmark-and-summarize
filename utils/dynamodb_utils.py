@@ -36,9 +36,7 @@ def add_user_to_db(username, password, dynamodb=None):
 
     table.put_item(Item=user)
 
-    print (table.get_item(Key={"username":username}))
-
-   # return 2
+    return 2
 
 #If user does not exist, returns 0
 #If user does exist but password is wrong, returns 1
