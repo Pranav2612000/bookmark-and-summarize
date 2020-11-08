@@ -19,11 +19,11 @@ def sign_in():
 
         #User does not exist
         if ret_val == 0:
-            return render_template('user_not_exist.html')
+            return render_template('login_failed.html', reason = "User does not exist. Try again.")
 
         #password is wrong
         elif ret_val == 1:
-            return render_template('password_wrong.html')
+            return render_template('login_failed.html', reason = "Password was wrong. Try again.")
 
         #Login successful, go to home page
         else:
