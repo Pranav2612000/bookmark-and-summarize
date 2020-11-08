@@ -24,18 +24,20 @@ def add_user_to_db(username, password, dynamodb=None):
     user = dict()
     user["username"] = username
 
-    #Verify that the user does not already exist
+    Verify that the user does not already exist
     verify = table.get_item(Key=user)
 
     if 'Item' in verify.keys():
-        return 1
+       return 1
 
     user["password"] = password
     user["bookmarks"] = list()
 
     table.put_item(Item=user)
 
-    return 2
+    print (table.get_item(Key={"username":username}))
+
+   # return 2
 
 #If user does not exist, returns 0
 #If user does exist but password is wrong, returns 1
@@ -67,8 +69,42 @@ def verify_login(username, password, dynamodb=None):
     else:
         return 2
 
-def get_summaries:
+def get_summaries(username):
 
+    dynamodb = default_dynamodb
+
+    table = dynamodb.Table('Profiles')
+
+    key["username"] = username
+
+    bookmarks = table.get_item(Key=key)['Item']['bookmarks']
+
+    return bookmarks
+
+def add_bookmark(username, url):
+
+    dynamodb = default_dynamodb
+
+    table = dynamodb.Table('Profiles')
+
+    key = dict()
+    key["username"] = username
+    response = table.get_item(Key=key)
+
+    summary = get_summary(url)
+
+    entry = dict()
+    entry['URL'] = url
+    entry['summary'] = summary
+
+    arr = response['Item']['bookmarks']
+
+    arr.append(entry)
+
+    table.put_item({"username":username, "password":response['Item']['password'], "bookmarks":arr})
+
+    return True
+    
 
 if __name__ == "__main__":
-    print (add_user_to_db("meaningless", "dummy_password"))
+    print (add_user_to_db("meaningless", "data"))

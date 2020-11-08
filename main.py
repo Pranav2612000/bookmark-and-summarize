@@ -71,11 +71,28 @@ def sign_in():
             else:
                 return redirect("/Home")
 
-@app.route('/Home')
+    else:
+        return 'Internal Server Error'
+
+@app.route('/Home', methods = ['GET', 'POST'])
 def render_home():
     return render_template('home.html')
 
-@app.route('/Bookmarks')
+@app.route('/Add_bookmark', methods = ['GET', 'POST'])
+def add_bookmark():
+    try:
+        if request.method == 'POST':
+
+            #Get user
+            user_id = ...
+
+            url = request.form['URL']
+
+            dynamodb_utils.add_bookmark(user_id, url)
+
+            return redirect('/Home')
+
+@app.route('/Bookmarks', methods = ['GET', 'POST'])
 def display_bookmarks():
     #Get user
 
