@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import sys
 import os
 from utils import *
-from utils import dynamodb_utils
+from utils import dynamodb_utils, get_summary
 
 
 app = Flask(__name__, template_folder = 'html_src/')
@@ -93,6 +93,13 @@ def add_bookmark():
             user_id = ...
 
             url = request.form['URL']
+
+            article_text = get_summary.get_text(url)
+
+            article_summary = get_summary.get_summary(article_text)
+
+            # For now, check whether we are getting summaries
+            print(article_summary)
 
             dynamodb_utils.add_bookmark(user_id, url)
 

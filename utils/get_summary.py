@@ -1,6 +1,18 @@
 import requests
+from bs4 import BeautifulSoup
 
 licence_key = "1a680fdbb39913433f80cd0b47c8ecad"
+
+def get_text(url):
+
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.text)
+
+    # TODO: add filter for soup to remove bad elements
+
+    return soup.get_text()
+
 
 def get_summary(article):
 
