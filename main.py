@@ -37,7 +37,7 @@ def new_user():
                 
                 #return render_template('failed.html')
                 return "Failed to add user"
-                
+
     except:
         return "Internal Server Error"
 
@@ -63,7 +63,21 @@ def sign_in():
 
             #Login successful, go to home page
             else:
-                return render_template('home.html')
+                return redirect("/Home")
+
+@app.route('/Home')
+def render_home():
+    return render_template('home.html')
+
+@app.route('/Bookmarks')
+def display_bookmarks():
+    #Get user
+
+    user_id = ...
+
+    summaries = dynamodb_utils.get_summaries(user_id)
+
+    return render_template('summaries.html', summaries = summaries)
 
 
 if __name__ == "__main__":
