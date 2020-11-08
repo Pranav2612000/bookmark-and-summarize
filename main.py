@@ -27,16 +27,22 @@ def new_user():
             ret_val = dynamodb_utils.add_user_to_db(user_id, password)
 
             #Successful Sign Up template to be rendered
-            if ret_val == True:
+            if ret_val == 2:
                
                 #return render_template('sign_up.html')
                 return "User Added Successfully"
             #Failure in signing up template to be rendered
 
             else:
+
+                if ret_val == 0:
+                    reason = "Username or password cannot be blank"
+
+                else:
+                    reason = "User already exists"
                 
-                #return render_template('failed.html')
-                return "Failed to add user"
+                return render_template('failed.html', reason = reason)
+                
 
     except:
         return "Internal Server Error"
