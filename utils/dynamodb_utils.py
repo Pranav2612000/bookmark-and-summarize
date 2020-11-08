@@ -24,7 +24,7 @@ def add_user_to_db(username, password, dynamodb=None):
     user = dict()
     user["username"] = username
 
-    Verify that the user does not already exist
+    #Verify that the user does not already exist
     verify = table.get_item(Key=user)
 
     if 'Item' in verify.keys():
