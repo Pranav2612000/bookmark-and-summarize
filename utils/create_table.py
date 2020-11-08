@@ -1,8 +1,9 @@
 import boto3
+from db_config import default_dynamodb
 
 def create_table(dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        dynamodb = default_dynamodb
 
     table = dynamodb.create_table(
         TableName='Profiles',
