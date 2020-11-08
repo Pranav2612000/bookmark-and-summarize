@@ -47,8 +47,8 @@ def new_user():
             #Successful Sign Up template to be rendered
             if ret_val == 2:
                
-                #return render_template('sign_up.html')
-                return "User Added Successfully"
+                return render_template('signup_success.html')
+
             #Failure in signing up template to be rendered
 
             else:
