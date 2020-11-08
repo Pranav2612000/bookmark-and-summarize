@@ -1,4 +1,7 @@
 import boto3
+import sys
+
+sys.path.append("./utils")
 from db_config import default_dynamodb
 
 
