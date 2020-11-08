@@ -20,6 +20,9 @@ def new_user():
         if ret_val == True:
             return render_template('sign_up.html')
 
+        else:
+            return render_template('failed.html')
+
 
 if __name__ == "__main__":
 
