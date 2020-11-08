@@ -24,7 +24,32 @@ def add_user_to_db(username, password, dynamodb=None):
 #If user does exist but password is wrong, returns 1
 #If user and password match, returns 2
 def verify_login(username, password, dynamodb=None):
+    if not username:
+        return 0
+
+    if not password:
+        return 1
+
+    if not dynamodb:
+        dynamodb = default_dynamodb
+
+    table = dynamodb.Table('Profiles')
+
+    key = dict()
+
+    key["username"] = username
+
+    response = table.get_item(Key=key)
+
+    if 'Item' not in response.keys():
+        return 0
+
+    elif response['Item']['password'] != password:
+        return 1
+
+    else:
+        return 2
 
 
 if __name__ == "__main__":
-    add_user_to_db("Vishal", "new_password")
+    verify_login("meaningless", "data")
