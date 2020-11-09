@@ -20,27 +20,28 @@
     <form method="POST">
         <div class="row text-center">
             <br>
-            <h2 style="color:#5C5C5C;">Your Bookmarks</h2><br><br>
-            <p class="text-center"><a href="/Home">Back to Home Page</a></p>
+            <p class="text-right"><a href="/Home"><button name="Back" value = "Back to Home" class="btn btn-primary btn-lg">Back to Home</button></a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></p>
+            <h2 style="color:#5C5C5C;">Your Bookmarks</h2>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="container">
             <div class="table-wrapper">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>URL</th>
-                            <th>Summary</th>
+                            <th><h4><center>URL</center></h4></th>
+                            <th><h4><center>Summary</center></h4></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for row in details %}
                         <tr>
-                            {% for detail in row %}
                             <td>
-                                {{ detail }}
+                                <h4><a href = {{ row.0 }}>{{ row.0 }}</a></h4>
                             </td>
-                            {% endfor %}
+                            <td>
+                                <h4>{{ row.1 }}</h4>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
