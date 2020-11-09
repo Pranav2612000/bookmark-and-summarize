@@ -92,9 +92,9 @@ def add_bookmark(username, url):
     key["username"] = username
     response = table.get_item(Key=key)
 
-    summary = get_summary(url)
+    title, summary = get_summary(url)
 
-    entry = {"url":url, "summary":summary}
+    entry = {"url":url, "title" : title, "summary":summary}
 
     arr = response['Item']['bookmarks']
 

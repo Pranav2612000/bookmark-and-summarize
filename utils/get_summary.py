@@ -23,8 +23,6 @@ def get_summary(url):
 
     article, title = get_text_and_title(url)
 
-    title_formatted = "<b>{}<b><br>".format(title)
-
     # Create the request body to be sent
     request_body = {
         "key":licence_key,
@@ -41,8 +39,8 @@ def get_summary(url):
     except:
         summary = "Unable to generate summary for this page"
 
-
-    return u"\n".join([title_formatted , summary])
+    return title, summary
+    
 
 if __name__ == '__main__':
 
