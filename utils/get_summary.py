@@ -30,7 +30,7 @@ def get_summary(url):
         "key":licence_key,
         "of":"json",
         "txt":article,
-        "sentences":"10"
+        "sentences":"5"
     }
 
     response = requests.post("https://api.meaningcloud.com/summarization-1.0", request_body)
