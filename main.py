@@ -98,10 +98,8 @@ def display_bookmarks():
     arr = list()
 
     for item in summaries:
-        tup = (item["url"], item["summary"])
+        tup = (item["url"], item["title"], item["summary"])
         arr.insert(0, tup)
-
-    
 
     return render_template('show_bookmarks.html', details = arr)
 

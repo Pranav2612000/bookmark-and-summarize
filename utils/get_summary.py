@@ -4,26 +4,33 @@ import lxml
 
 licence_key = "1a680fdbb39913433f80cd0b47c8ecad"
 
-def get_text(url):
+def get_text_and_title(url):
 
     response = requests.get(url)
 
     soup = BeautifulSoup(response.text, 'lxml')
 
-    return u"\n".join([x.get_text() for x in soup.find_all('p')])
+    standard_text = u"\n".join([x.get_text() for x in soup.find_all('p')])
+
+    if standard_text == "":
+
+        standard_text = soup.get_text(separator = u"\n")
+
+    return standard_text, soup.head.title.get_text()
 
 
 def get_summary(url):
 
-    article = get_text(url)
+    article, title = get_text_and_title(url)
 
     # Create the request body to be sent
     request_body = {
         "key":licence_key,
         "of":"json",
         "txt":article,
-        "sentences":"10"
+        "sentences":"5"
     }
+
     response = requests.post("https://api.meaningcloud.com/summarization-1.0", request_body)
     summarized_resp = response.json()
 
@@ -31,7 +38,9 @@ def get_summary(url):
         summary = summarized_resp["summary"]
     except:
         summary = "Unable to generate summary for this page"
-    return summary
+
+    return title, summary
+    
 
 if __name__ == '__main__':
 
