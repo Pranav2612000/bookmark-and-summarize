@@ -10,7 +10,15 @@ def get_text(url):
 
     soup = BeautifulSoup(response.text, 'lxml')
 
-    return u"\n".join([x.get_text() for x in soup.find_all('p')])
+    standard_text = u"\n".join([x.get_text() for x in soup.find_all('p')])
+
+    if standard_text == "":
+
+        return soup.get_text(separator = u"\n")
+
+    else:
+
+        return standard_text
 
 
 def get_summary(url):
