@@ -74,6 +74,8 @@ def get_summaries(username):
 
     table = dynamodb.Table('Profiles')
 
+    key = dict()
+
     key["username"] = username
 
     bookmarks = table.get_item(Key=key)['Item']['bookmarks']
@@ -109,4 +111,4 @@ def add_bookmark(username, url):
     
 
 if __name__ == "__main__":
-    print (add_user_to_db("meaningless", "data"))
+    print (get_summaries("Admin"))
