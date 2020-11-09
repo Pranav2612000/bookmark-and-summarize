@@ -27,6 +27,7 @@ def sign_in():
 
         #Login successful, go to home page
         else:
+            session['username'] = user_id
             return redirect("/Home")
 
     else:
@@ -76,7 +77,7 @@ def render_home():
 
     if request.method == 'POST':
 
-        user_id = ...
+        user_id = session['username']
 
         url = request.form['URL']
 
@@ -88,7 +89,7 @@ def render_home():
 def display_bookmarks():
     #Get user
 
-    user_id = ...
+    user_id = session['username']
 
     summaries = dynamodb_utils.get_summaries(user_id)
 
