@@ -7,6 +7,8 @@ from utils import dynamodb_utils, get_summary
 
 app = Flask(__name__, template_folder = 'html_src/')
 
+app.secret_key = os.urandom(12).hex()
+
 @app.route('/', methods = ['GET', 'POST'])
 def sign_in():
     if request.method == 'POST':
@@ -93,7 +95,12 @@ def display_bookmarks():
 
     summaries = dynamodb_utils.get_summaries(user_id)
 
-    return render_template('summaries.html', summaries = summaries)
+    arr = list()
+
+    for item in summaries:
+        arr.append((item[0], item[1]))
+
+    return render_template('summaries.html', summaries = arr)
 
 
 if __name__ == "__main__":

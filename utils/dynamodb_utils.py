@@ -92,13 +92,18 @@ def add_bookmark(username, url):
 
     summary = get_summary(url)
 
-    entry = (url, summary)
+    entry = {"url":url, "summary":summary}
 
     arr = response['Item']['bookmarks']
 
     arr.append(entry)
 
-    table.put_item({"username":username, "password":response['Item']['password'], "bookmarks":arr})
+    item = dict()
+    item["username"] = username
+    item["password"] = response['Item']['password']
+    item["bookmarks"] = arr
+
+    table.put_item(Item=item)
 
     return True
     
