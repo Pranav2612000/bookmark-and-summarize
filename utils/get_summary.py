@@ -10,9 +10,7 @@ def get_text(url):
 
     soup = BeautifulSoup(response.text, 'lxml')
 
-    # TODO: add filter for soup to remove bad elements (maybe, not needed)
-
-    return soup.get_text()
+    return u"\n".join([x.get_text() for x in soup.find_all('p')])
 
 
 def get_summary(url):
@@ -29,7 +27,10 @@ def get_summary(url):
     response = requests.post("https://api.meaningcloud.com/summarization-1.0", request_body)
     summarized_resp = response.json()
 
-    summary = summarized_resp["summary"]
+    try: 
+        summary = summarized_resp["summary"]
+    except:
+        summary = "Unable to generate summary for this page"
     return summary
 
 if __name__ == '__main__':
