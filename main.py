@@ -101,7 +101,7 @@ def display_bookmarks():
         tup = (item["url"], item["summary"])
         arr.append(tup)
 
-    return render_template('show_bookmarks.html', summaries = arr)
+    return render_template('show_bookmarks.html', details = arr)
 
 
 if __name__ == "__main__":
